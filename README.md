@@ -97,7 +97,7 @@ res_ses <- ses_function_complete(sim.data, diss_obs)
 
 res_ses$df #the results
 ```
-##### violin plots #####
+# Step 6: Plot results
 ``` r
 traits_all <- data.frame(rd = (res_ses$null["nnd.trait",]))
 traits_end <- data.frame(rd = (res_ses$null["nnd.trait.end",]))
