@@ -8,9 +8,9 @@ The code Code_CreateArtificialData.R creates four datasets:
 
 coloAge.Rdata contains the names of the archipelagos, the numbers of colonization events per archipelago and the maximum geological age for each archipelago.
 
-data.community.Rdata contains the data for the three archipelago together. This is a list with (1) the archipelago x species matrix, (2) the traits, (3) the phylogenetic tree and (4) the statu (endemic, non-endemic) and the family for each species. This data are specifically used to calculate the observed morphological and phylogenetic convergence.  
+data.community.Rdata contains the data for the three archipelagos merged together. This is a list with (1) the archipelagos x species matrix, (2) the traits, (3) the phylogenetic tree and (4) the status (endemic, non-endemic) and the family for each species. This data are specifically used to calculate the observed morphological and phylogenetic convergence.  
 
-data.archip.Rdata contains a list containing for each archipelgo (1) the phylogenetic tree, (2) the traits, (3) the statu (endemic, non-endemic) and the family for each species, (4) the phylogenetic tree of the species pool, (5) the traits of the species pool (6) the rates from the Brownian motion model for each family contained in the pool and (7) the birth and death rates for each family contained in the pool.
+data.archip.Rdata contains a list containing for each archipelgo (1) the phylogenetic tree, (2) the traits, (3) the status (endemic, non-endemic) and the family for each species, (4) the phylogenetic tree of the species pool, (5) the traits of the species pool (6) the rates from the Brownian motion model for each family contained in the pool and (7) the birth and death rates for each family contained in the pool.
 
 sppoolGlobal.Rdata is the global phylogenetic tree combining all the pools.
 
