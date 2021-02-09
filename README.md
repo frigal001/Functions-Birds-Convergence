@@ -36,7 +36,7 @@ fct_cladogenesis
 fct_anagenesis
 fct_ana_clado
 ```
-these functions generate random traits and tree for each archipelago based on random colonization and speciation while keeping the number of species and number of endemic species constant. Three functions could be probably merged in one to simplify the code. The function needs as inputs the number of species that will use the generate anagenesis and the cladogenetic event(s) and the number of species that will stay unchanged (native).
+these functions generate random traits and trees for each archipelago based on random colonization and speciation while keeping the number of species and number of endemic species constant. These three functions could be probably merged in one to optimize the code. These functions needs as inputs the number of species that will use the generate anagenesis and the cladogenetic event(s) and the number of species that will stay unchanged (native).
 
 The function
 ``` r
@@ -62,7 +62,73 @@ ses_function_complete
 ```
 calculate the ses and p-values for a one tailed-test (convergence)
 
+# Example
 
+# Step 1: upload the datasets created with Code_CreateArtificialData
+
+``` r
+load("coloAge.Rdata")
+load("data.community.Rdata")
+load("data.archip.Rdata")
+load("sppoolGlobal.Rdata")
+```
+
+# Step 2: we create a list for each archipelago with the N simulated data (traits and trees)
+``` r
+archipelago.names <- c("A", "B", "C")
+List_data <- list()
+for (i in 1:length(archipelago.names)){
+  List_data[[i]] <- prepare_data_simulation(data.archip, coloAge, names = archipelago.names[i], nsim=100, verbose = T)
+}
+names(List_data) <- archipelago.names
+```
+# Step 3: we simulate MNTDturn for traits and trees for all species, endemic and native non-endemic species
+``` r
+sim.data <- Simulation_null_NND(List_data, sppoolGlobal)
+```
+
+# Step 4: we calculate the observed MNTDturn for trait and trees for all species, endemic and native non-endemic species 
+``` r
+diss_obs <- observed_metrics_NND(data.community)
+```
+# Step 5: we use the observed and simulated MNTDturn values to calculate the SES and the associated p-values
+``` r
+res_ses <- ses_function_complete(sim.data, diss_obs)
+
+res_ses$df #the results
+```
+##### violin plots #####
+``` r
+traits_all <- data.frame(rd = (res_ses$null["nnd.trait",]))
+traits_end <- data.frame(rd = (res_ses$null["nnd.trait.end",]))
+traits_nat <- data.frame(rd = (res_ses$null["nnd.trait.nat",]))
+
+obs_traits_all <- res_ses$df["nnd.trait",]$obs
+obs_traits_end <- res_ses$df["nnd.trait.end",]$obs
+obs_traits_nat <- res_ses$df["nnd.trait.nat",]$obs
+
+pv_traits_all <- res_ses$df["nnd.trait",]$pv
+pv_traits_end <- res_ses$df["nnd.trait.end",]$pv
+pv_traits_nat <- res_ses$df["nnd.trait.nat",]$pv
+
+
+df.box <- data.frame(sim = c(traits_all$rd, traits_end$rd, traits_nat$rd), 
+                     grp = gl(3, 100, labels = c("ALL", "END", "NAT")))
+df.box$grp <- factor(df.box$grp, levels = rev(levels(df.box$grp)))
+df.points <- data.frame(obs = c(obs_traits_all, obs_traits_end, obs_traits_nat), 
+                        grp = c("ALL", "END", "NAT"), limit = rep(0.1, 3), 
+                        pvalue = c(paste("P=", pv_traits_all), 
+                                   paste("P=", pv_traits_end),
+                                   paste("P=", pv_traits_nat)))
+
+ggplot() + 
+  geom_violin(data = df.box, mapping = aes(grp, sim), fill= "grey", alpha=0.6, color = NA)  + coord_flip() +
+  labs(y="Among archipelago turnover", x = "") + theme_bw() + 
+  geom_point(data = df.points, mapping = aes(grp, obs), size = 4, shape = 19, alpha=1) + 
+  theme(legend.position = "none") + scale_color_manual(values = c("red")) + 
+  geom_label(data = df.points, mapping = aes(grp, limit, label = pvalue), size = 2, 
+             hjust = 0, color = "black", fontface = "bold") 
+```
 
 
 
