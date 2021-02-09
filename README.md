@@ -64,7 +64,7 @@ calculate the ses and p-values for a one tailed-test (convergence)
 
 # Example
 
-# Step 1: upload the datasets created with Code_CreateArtificialData
+# Step 1: upload the datasets created with Code_CreateArtificialData.R
 
 ``` r
 load("coloAge.Rdata")
