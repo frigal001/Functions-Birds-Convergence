@@ -2,32 +2,31 @@
 
 Code accompanying the paper: Triantis et al. Deterministic assembly and anthropogenic extinctions drive convergence of island bird communities (Submitted)
 
-The R scripts can be used to run the analyses in the paper. The code Code_CreateArtificialData.R is to create artifical datasets for three hypothetic archipelagos along with their respective species pool. The code Code_AllFunctions.R contains the main functions to calculate and test morphological and phylogenetic convergence among archipelagos.
+The R scripts can be used to run the analyses in the paper. The code Code_CreateArtificialData.R is to create artifical datasets for three hypothetic archipelagos along with their respective species pool (both archipelago and species pool dataset containing traits and phylogenetic tree). The code Code_AllFunctions.R contains the main functions used to calculate and test morphological and phylogenetic convergence among archipelagos.
 
 The code Code_CreateArtificialData.R creates four datasets:
 
 coloAge.Rdata contains the names of the archipelagos, the numbers of colonization events per archipelago and the maximum geological age for each archipelago.
 
-data.community.Rdata contains the data for the three archipelagos merged together. This is a list with (1) the archipelagos x species matrix, (2) the traits, (3) the phylogenetic tree and (4) the status (endemic, non-endemic) and the family for each species. This data are specifically used to calculate the observed morphological and phylogenetic convergence.  
+data.community.Rdata contains the data for the three archipelagos merged together. This is a list with (1) the archipelagos x species matrix, (2) the traits for all the species encountered across the three archipelagos, (3) the phylogenetic tree for all the species and (4) the status (endemic, non-endemic) and the family for each species. This data is used to calculate the observed morphological and phylogenetic convergence among archipelagos.  
 
-data.archip.Rdata contains a list containing for each archipelgo (1) the phylogenetic tree, (2) the traits, (3) the status (endemic, non-endemic) and the family for each species, (4) the phylogenetic tree of the species pool, (5) the traits of the species pool (6) the rates from the Brownian motion model for each family contained in the pool and (7) the birth and death rates for each family contained in the pool.
+data.archip.Rdata contains a list with, for each archipelgo, (1) the phylogenetic tree, (2) the traits, (3) the status (endemic, non-endemic) and the family for each species, (4) the phylogenetic tree of the species pool, (5) the traits of the species pool (6) the rates from the Brownian motion model for each family contained in the pool and (7) the birth and death rates for each family contained in the pool.
 
-sppoolGlobal.Rdata is the global phylogenetic tree combining all the pools.
+sppoolGlobal.Rdata is the global phylogenetic tree with all the species from all the pools.
 
 The code Code_AllFunctions.R contains the functions:
-
 ``` r
 fct_phy_colo_spe_nnd_turn
 ```
-to calculate MNTDturn between archipelagos with the reconstructed trees from the simulations
+This function is used to calculate $$MNTD_turn$$ between archipelagos with the reconstructed trees from the simulations
 ``` r
 fct_nnd_turnover
 ```
-to calculate MNTDturn between archipelagos with the reconstructed traits from the simulations
+This function is used to calculate $$MNTD_turn$$ between archipelagos with the reconstructed traits from the simulations
 ``` r
 fct_age
 ```
-to calculate the species age in a given phylogeny
+This function is used to calculate the species age from a given phylogeny
 
 
 The code has also three core functions:
@@ -36,31 +35,26 @@ fct_cladogenesis
 fct_anagenesis
 fct_ana_clado
 ```
-these functions generate random traits and trees for each archipelago based on random colonization and speciation while keeping the number of species and number of endemic species constant. These three functions could be probably merged in one to optimize the code. These functions needs as inputs the number of species that will use the generate anagenesis and the cladogenetic event(s) and the number of species that will stay unchanged (native).
+These functions generate random traits and phylogenetic trees for each archipelago based on random colonization and speciation while keeping the total number of species and number of endemic species constant. These three functions could be probably merged into one function in order to optimize the code. These functions need as inputs the number of species that will be used to generate anagenesis and cladogenetic event(s) and the number of species that will stay unchanged (native).
 
-The function
 ``` r
 prepare_data_simulation
 ```
-is used to prepare and organize the new traits and new trees of each archipelago that will be used to calcualte the simulated MNTDturn
+This function is used to prepare and organize the new traits and new trees of each archipelago that will be used to calcualte the simulated $$MNTD_turn$$.
 
-and the function
 ``` r
 Simulation_null_NND
 ```
-is used to simulate N values of random MNTDturn.
+This function is used to simulate _N_ values of random $$MNTD_turn$$.
 
-The function
 ``` r
 observed_metrics_NND
 ```
-calculates the observed MNTD
-
-and the function 
+This function calculate the observed $$MNTD_turn$$.
 ``` r
 ses_function_complete
 ```
-calculate the ses and p-values for a one tailed-test (convergence)
+This function calculates the SES (standardized effect size) for $$MNTD_turn$$ and the P-values for a one tailed-test (convergence)
 
 # Example
 
