@@ -157,8 +157,6 @@ fct_age <- function(phy){
   age <- apply(dage, 2, function(x) min(x, na.rm = T)/2)
   species.ages <- data.frame(mrca.age=age, species = phy$tip.label)
   row.names(species.ages)<-phy$tip.label
-  ## species ages is node.ages data frame reduced to the tips (species)
-  ## species.ages <- species.ages[species.ages$mrca.age>age,]
   return(species.ages)
 }
 
@@ -170,11 +168,11 @@ fct_age <- function(phy){
 ############################################################################
 ############################################################################
 
-# the three core functions to generate random traits and tree for each archipelago based on random
-# colonization and speciation while keeping the nb of species and nb of endemic species constant. Nb of 
+# the three core functions to generate random traits and trees for each archipelago based on random
+# colonization and speciation while keeping the number of species and number of endemic species constant. Number of 
 # colonization events was extracetd from the literature. Three functions are available but could be 
-# probably merged to simplify the code. The function needs as inputs the nb of species that will generate 
-# cladogenetic events, nb of species that will stau unchanged (native non-endemic) and the nb of species 
+# probably merged to simplify the code. The functions need as inputs the number of species that will generate 
+# cladogenetic events, number of species that will stay unchanged (native non-endemic) and the number of species 
 # that will give birth to anagenetic species. 
 
 
@@ -185,7 +183,7 @@ fct_cladogenesis <- function(data.archip, n.cladogenesis, nb.do.clado, age, n.na
   species.cladogenesis <- n.cladogenesis
   age.clado <- NA
   for (k in 1:length(n.cladogenesis)){
-    age.clado[k] <- species.age[which(rownames(species.age)%in%n.cladogenesis[k]),]$mrca.age
+    age.clado[k] <- species.age[which(rownames(species.age)%in%species.cladogenesis[k]),]$mrca.age
     }
     age.clado <- ifelse(age.clado > age, age, age.clado)
 
@@ -230,9 +228,6 @@ fct_cladogenesis <- function(data.archip, n.cladogenesis, nb.do.clado, age, n.na
     tree.colo <- bind.tree(tree.colo, tr, where = where, position = placement)
   }
   
-  #tree.colo$edge.length
-  #plot(tree.colo)
-  #axisPhylo()
   
   tree.colo <- drop.tip(tree.colo, species.cladogenesis)
   
@@ -324,7 +319,7 @@ fct_ana_clado <- function(data.archip, n.anagenesis, n.cladogenesis, nb.do.clado
   age.clado <- NA
   for (k in 1:length(n.cladogenesis)){
     
-    age.clado[k] <- species.age[which(rownames(species.age)%in%n.cladogenesis[k]),]$mrca.age
+    age.clado[k] <- species.age[which(rownames(species.age)%in%species.cladogenesis[k]),]$mrca.age
   }
   age.clado <- ifelse(age.clado > age, age, age.clado)
   
@@ -413,10 +408,6 @@ fct_ana_clado <- function(data.archip, n.anagenesis, n.cladogenesis, nb.do.clado
   }
   tree.colo <- drop.tip(tree.colo, species.cladogenesis)
   
-  plot(tree.colo)
-  axisPhylo()
-  nodelabels()
-  
   trait.ana <- do.call(rbind, sim.trait.ana)
   rownames(trait.ana) <- species.anagenesis
   trait.clado <- do.call(rbind, sim.trait.clado)
@@ -466,8 +457,6 @@ prepare_data_simulation <- function(data.archip, coloAge, names, nsim, verbose =
   
   for (j in 1:nsim){
     
-    #tryCatch({
-      
       N <- length(arc$phy$tip.label);N
       End <- length(which(arc$df[,1]=="End"))
       sp.colonisation.native <-  N - End
@@ -505,12 +494,9 @@ prepare_data_simulation <- function(data.archip, coloAge, names, nsim, verbose =
       data.output[[j]] <- outputs
       
       if(verbose) print(j)
-    #}, error=function(e){cat("ERROR :", j, "\n")})
   }
   
-  
-  #listRes <- list(data.shape, data.tree)
-  #names(listRes) <- c("RdMorpho", "RdTree")
+
   return(data.output)
   
   
@@ -621,7 +607,7 @@ Simulation_null_NND <- function(List_data, sppoolGlobal){
   return(list_diss_null)
 }
 
-# function observed_metrics_NND to calculate the observed nnd
+# function observed_metrics_NND to  calculate the observed nnd
 
 observed_metrics_NND <- function(list.archi){
   
