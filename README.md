@@ -18,7 +18,7 @@ The code Code_AllFunctions.R contains the functions:
 ``` r
 fct_phy_colo_spe_nnd_turn
 ```
-This function is used to calculate _MNTD~TURN~_ between archipelagos with the reconstructed trees from the simulations
+This function is used to calculate MNTD__TURN__ between archipelagos with the reconstructed trees from the simulations
 ``` r
 fct_nnd_turnover
 ```
