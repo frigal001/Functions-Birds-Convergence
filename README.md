@@ -66,8 +66,7 @@ load("data.community.Rdata")
 load("data.archip.Rdata")
 load("sppoolGlobal.Rdata")
 ```
-
-# Step 2: we create a list for each archipelago with the N simulated data (traits and trees)
+# Step 2: Create a list for each archipelago with the N simulated data (traits and trees).
 ``` r
 archipelago.names <- c("A", "B", "C")
 List_data <- list()
@@ -76,22 +75,21 @@ for (i in 1:length(archipelago.names)){
 }
 names(List_data) <- archipelago.names
 ```
-# Step 3: we simulate MNTDturn for traits and trees for all species, endemic and native non-endemic species
+# Step 3: Simulate _MNTD~turn_ for traits and trees for all species, endemic and native non-endemic species.
 ``` r
 sim.data <- Simulation_null_NND(List_data, sppoolGlobal)
 ```
-
-# Step 4: we calculate the observed MNTDturn for trait and trees for all species, endemic and native non-endemic species 
+# Step 4: Calculate the observed MNTDturn for trait and trees for all species, endemic and native non-endemic species.
 ``` r
 diss_obs <- observed_metrics_NND(data.community)
 ```
-# Step 5: we use the observed and simulated MNTDturn values to calculate the SES and the associated p-values
+# Step 5: Calculate the SES and the P-values.
 ``` r
 res_ses <- ses_function_complete(sim.data, diss_obs)
 
 res_ses$df #the results
 ```
-# Step 6: Plot results
+# Step 6: Plot results.
 ``` r
 traits_all <- data.frame(rd = (res_ses$null["nnd.trait",]))
 traits_end <- data.frame(rd = (res_ses$null["nnd.trait.end",]))
