@@ -18,11 +18,11 @@ The code Code_AllFunctions.R contains the functions:
 ``` r
 fct_phy_colo_spe_nnd_turn
 ```
-This function is used to calculate $$MNTD_turn$$ between archipelagos with the reconstructed trees from the simulations
+This function is used to calculate _MNTD~TURN~_ between archipelagos with the reconstructed trees from the simulations
 ``` r
 fct_nnd_turnover
 ```
-This function is used to calculate _MNTD~turn~_ between archipelagos with the reconstructed traits from the simulations
+This function is used to calculate _MNTD~TURN~_ between archipelagos with the reconstructed traits from the simulations
 ``` r
 fct_age
 ```
@@ -45,16 +45,16 @@ This function is used to prepare and organize the new traits and new trees of ea
 ``` r
 Simulation_null_NND
 ```
-This function is used to simulate _N_ values of random $$MNTD_turn$$.
+This function is used to simulate _N_ values of random _MNTD~TURN~_.
 
 ``` r
 observed_metrics_NND
 ```
-This function calculate the observed $$MNTD_turn$$.
+This function calculate the observed _MNTD~TURN~_.
 ``` r
 ses_function_complete
 ```
-This function calculates the SES (standardized effect size) for $$MNTD_turn$$ and the P-values for a one tailed-test (convergence)
+This function calculates the SES (standardized effect size) for _MNTD~TURN~_ and the P-values for a one tailed-test (convergence)
 
 # Example
 
@@ -75,11 +75,11 @@ for (i in 1:length(archipelago.names)){
 }
 names(List_data) <- archipelago.names
 ```
-# Step 3: Simulate _MNTD~turn_ for traits and trees for all species, endemic and native non-endemic species.
+# Step 3: Simulate _MNTD~TURN~_ for traits and trees for all species, endemic and native non-endemic species.
 ``` r
 sim.data <- Simulation_null_NND(List_data, sppoolGlobal)
 ```
-# Step 4: Calculate the observed MNTDturn for trait and trees for all species, endemic and native non-endemic species.
+# Step 4: Calculate the observed _MNTD~TURN~_ for trait and trees for all species, endemic and native non-endemic species.
 ``` r
 diss_obs <- observed_metrics_NND(data.community)
 ```
