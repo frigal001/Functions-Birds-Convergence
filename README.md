@@ -22,7 +22,7 @@ This function is used to calculate $$MNTD_turn$$ between archipelagos with the r
 ``` r
 fct_nnd_turnover
 ```
-This function is used to calculate $$MNTD_turn$$ between archipelagos with the reconstructed traits from the simulations
+This function is used to calculate _MNTD~turn~_ between archipelagos with the reconstructed traits from the simulations
 ``` r
 fct_age
 ```
