@@ -14,10 +14,9 @@ data.archip.Rdata contains a list with, for each archipelgo, (1) the phylogeneti
 
 sppoolGlobal.Rdata is the global phylogenetic tree with all the species from all the pools.
 
-The code Code_AllFunctions.R contains the functions:
-The function `fct_phy_colo_spe_nnd_turn` is used to calculate _MNTDturn_ between archipelagos with the reconstructed trees from the simulations. The function `fct_nnd_turnover` is used to calculate _MNTDturn_ between archipelagos with the reconstructed traits from the simulations. The function  `fct_age` is used to calculate the species age from a given phylogeny.
+The code Code_AllFunctions.R contains the main functions used to calculate and test morphological and phylogenetic convergence among archipelagos. The function `fct_phy_colo_spe_nnd_turn` is used to calculate _MNTDturn_ between archipelagos with the reconstructed trees from the simulations. The function `fct_nnd_turnover` is used to calculate _MNTDturn_ between archipelagos with the reconstructed traits from the simulations. The function  `fct_age` is used to calculate the species age from a given phylogeny.
 
-The code has also three core functions:
+The code Code_AllFunctions.R has also three core functions:
 ``` r
 fct_cladogenesis
 fct_anagenesis
@@ -25,7 +24,7 @@ fct_ana_clado
 ```
 These functions generate random traits and phylogenetic trees for each archipelago based on random colonization and speciation while keeping the total number of species and number of endemic species constant. These three functions could be probably merged into one function in order to optimize the code. These functions need as inputs the number of species that will be used to generate anagenesis and cladogenetic event(s) and the number of species that will stay unchanged (native).
 
-The function `prepare_data_simulation` is used to prepare and organize the new traits and new trees of each archipelago that will be used to calcualte the simulated $$MNTD_turn$$. The function `Simulation_null_NND` is used to simulate _N_ values of random _MNTDturn_. The function `observed_metrics_NND` calculates the observed _MNTDturn_. The function `ses_function_complete` calculates the SES (standardized effect size) for _MNTDturn_ and the P-values for a one tailed-test (convergence).
+The function `prepare_data_simulation` is used to prepare and organize the new traits and new trees of each archipelago that will be used to calcualte the simulated _MNTDturn_. The function `Simulation_null_NND` is used to simulate _N_ values of random _MNTDturn_. The function `observed_metrics_NND` calculates the observed _MNTDturn_. The function `ses_function_complete` calculates the SES (standardized effect size) for _MNTDturn_ and the P-values for a one tailed-test (convergence).
 
 # Example
 
